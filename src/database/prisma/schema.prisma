@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  email     String   @unique
+  name      String?
+  password  String   // Field mật khẩu
+  createdAt DateTime @default(now())
+}
+model Store {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String?
+  priceType   String
+  address     String
+  image       String   // Ảnh đại diện của Store
+  images      Image[]  // Quan hệ 1-n với bảng Image
+  createdAt   DateTime @default(now())
+}
+
+model Image {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  storeId String
+  image   String
+  store   Store  @relation(fields: [storeId], references: [id])
+}
