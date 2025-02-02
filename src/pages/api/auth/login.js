@@ -1,4 +1,4 @@
-import { loginService } from "../../../services/authService";
+import { loginService } from "@/services/authService";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {

@@ -12,6 +12,13 @@ const nextConfig = {
       },
     ];
   },
+  images: {
+    domains: [
+      "res.cloudinary.com",
+      "lh3.googleusercontent.com",
+      "img.tripi.vn",
+    ],
+  },
 };
 
 export default nextConfig;

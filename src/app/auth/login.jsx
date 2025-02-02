@@ -14,7 +14,7 @@ export default function LoginPage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
         try {
             const response = await fetch("/api/auth/login", {
                 method: "POST",
@@ -23,14 +23,15 @@ export default function LoginPage() {
                 },
                 body: JSON.stringify({ email, password }),
             });
-    
+
             const data = await response.json();
-    
+
             if (response.ok) {
                 setMessage("Đăng nhập thành công!");
                 console.log(data);
-    
-                // Dùng navigate để chuyển hướng trong React Router DOM
+
+                // Lưu user ID vào localStorage
+                localStorage.setItem("userId", data.user.id);
                 navigate("/liststores");
             } else {
                 setMessage(data.message || "Đăng nhập thất bại!");
@@ -40,7 +41,7 @@ export default function LoginPage() {
             setMessage("Có lỗi xảy ra, vui lòng thử lại!");
         }
     };
-    
+
 
     return (
         <>

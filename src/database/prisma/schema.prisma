@@ -8,21 +8,27 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  email     String   @unique
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  email     String     @unique
   name      String?
-  password  String   // Field mật khẩu
-  createdAt DateTime @default(now())
+  password  String
+  createdAt DateTime   @default(now())
+
+  // Quan hệ ngược với Comment (1 user có nhiều comment)
+  comments  Comment[]
 }
 model Store {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   description String?
   priceType   String
   address     String
-  image       String   // Ảnh đại diện của Store
-  images      Image[]  // Quan hệ 1-n với bảng Image
-  createdAt   DateTime @default(now())
+  image       String
+  images      Image[]    // Quan hệ 1-n với bảng Image
+  createdAt   DateTime   @default(now())
+
+  // Quan hệ ngược với Comment (1 store có nhiều comment)
+  comments    Comment[]
 }
 
 model Image {
@@ -30,4 +36,19 @@ model Image {
   storeId String
   image   String
   store   Store  @relation(fields: [storeId], references: [id])
+}
+
+model Comment {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String
+  storeId   String
+  content   String               // Nội dung comment
+  rating    Int?                 // Tuỳ chọn: lưu đánh giá (sao) 1-5, v.v.
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt  // Tự động cập nhật khi record thay đổi
+
+  // Liên kết tới bảng User (người comment)
+  user  User  @relation(fields: [userId], references: [id])
+  // Liên kết tới bảng Store (cửa hàng được comment)
+  store Store @relation(fields: [storeId], references: [id])
 }
