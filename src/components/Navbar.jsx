@@ -64,7 +64,7 @@ export default function Example() {
         <PopoverGroup className="hidden lg:flex lg:gap-x-12">
           <Popover className="relative">
             <PopoverButton className="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900">
-              Product
+              Menu
               <ChevronDownIcon aria-hidden="true" className="size-5 flex-none text-gray-400" />
             </PopoverButton>
 
@@ -107,13 +107,13 @@ export default function Example() {
           </Popover>
 
           <a href="#" className="text-sm/6 font-semibold text-gray-900">
-            Features
+            Quán ăn
           </a>
           <a href="#" className="text-sm/6 font-semibold text-gray-900">
-            Marketplace
+            Chỗ đi chơi
           </a>
           <a href="#" className="text-sm/6 font-semibold text-gray-900">
-            Company
+            Người bị nói xấu
           </a>
         </PopoverGroup>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
